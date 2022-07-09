@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>LED Controller</title>
+    <meta name="description" content="LED Controller">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+</head>
+
+<body>
+    <header class="layout__led-controller__header">
+        LED Controller
+    </header>
+    <main class="layout__led-controller__main">
+        <iframe id="dummy-target" name="dummy-target"></iframe>
+        <div class="led-green">
+            <h1>Green</h1>
+            <div class="layout__led-on-off">
+                <form action="/api/led" method="post" target="dummy-target">
+                    <div class="layout__led-on-off__button">
+                        <button type="submit" id="button__led-green-on" name="led-green" value="on">ON</button>
+                        <button type="submit" id="button__led-green-off" name="led-green" value="off">OFF</button>
+                    </div>
+                </form>
+            </div>
+            <div class="layout__led-blink">
+                <form action="/api/led" method="post" target="dummy-target">
+                    <ul>
+                        <li>
+                            <label for="number__led-green-delay-on">Delay Time (ON) [msec]: </label>
+                            <input type="number" id="number__led-green-delay-on" name="delay-on" max="10000" min="100"
+                                placeholder="500" required>
+                        </li>
+                        <li>
+                            <label for="number__led-green-delay-off">Delay Time (OFF) [msec]: </label>
+                            <input type="number" id="number__led-green-delay-off" name="delay-off" max="10000" min="100"
+                                placeholder="500" required>
+                        </li>
+                    </ul>
+                    <div class="layout__led-on-off__button">
+                        <button type="submit" id="button__led-green-blink" name="led-green" value="blink">BLINK</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="layout__led-controller__footer">
+        &copy; Keitetsu
+    </footer>
+</body>
+
+</html>

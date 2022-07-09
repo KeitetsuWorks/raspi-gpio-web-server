@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/*- Copyright 2021 Keitetsu -*/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: medium;
+  font-size: max(16px, 1rem);
+  overflow-wrap: break-word;
+}
+
+.layout__led-controller__header {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #103452;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.layout__led-controller__main {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+#dummy-target {
+  display: none;
+}
+
+.layout__led-controller__main button {
+  margin: 0.5rem;
+  padding: 1rem;
+  border: none;
+  text-align: center;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layout__led-controller__main h1 {
+  margin: 0.5rem 0;
+  padding: 0.25rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.layout__led-controller__main ul {
+  margin: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.layout__led-controller__main input {
+  margin: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.layout__led-on-off__button,
+.layout__led-blink__button {
+  display: flex;
+  justify-content: center;
+}
+
+.layout__led-on-off__button button {
+  width: 50%;
+}
+
+.layout__led-on-off__button button {
+  width: 100%;
+}
+
+.led-green h1 {
+  border-bottom: solid 4px #228B22;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.led-green button {
+  background-color: #228B22;
+  color: #ffffff;
+}
+
+.layout__led-controller__footer {
+  margin: 0.5rem 0;
+  padding: 0.25rem 0.5rem;
+  text-align: right;
+  background-color: #103452;
+  color: #ffffff;
+  font-size: 1rem;
+}
