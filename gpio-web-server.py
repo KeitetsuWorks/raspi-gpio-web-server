@@ -148,7 +148,6 @@ class LEDCtrlThread(threading.Thread):
 
 def main(args):
     debug_mode = args.debug
-    print(debug_mode)
     # LED pin assignment dict
     led_conf = {
         "led-green": {
