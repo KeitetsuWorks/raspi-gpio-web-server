@@ -67,10 +67,10 @@ body {
 }
 
 .layout__led-on-off__button button {
-  width: 50%;
+  width: 100%;
 }
 
-.layout__led-on-off__button button {
+.layout__led-blink__button button {
   width: 100%;
 }
 
