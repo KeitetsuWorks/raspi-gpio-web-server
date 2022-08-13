@@ -1,0 +1,23 @@
+site_name: gpio-web-server
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            filters: None
+            show_source: false
+      watch:
+        - ./
+        - ./led/
+
+nav:
+  - Home: index.md
+  - gpio-web-server: gpio-web-server.md
+  - LEDState: LEDState.md
+  - LED: LED.md
