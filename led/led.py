@@ -10,17 +10,21 @@
 # @par          License
 # This software is released under the MIT License.
 #
+"""LED module
 
-# RPi.GPIOライブラリのインストール方法
-# pip install RPi.GPIO
+Todo:
+    RPi.GPIO library is required.
+
+        $ pip install RPi.GPIO
+"""
+
 import RPi.GPIO as GPIO
 from enum import Enum
 import time
 
 
 class LEDState(Enum):
-    """
-    LED状態クラス
+    """LED state class
     """
     OFF = 0
     ON = 1
@@ -31,13 +35,16 @@ class LEDState(Enum):
 # GPIO.BCMについて
 # https://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-between-board-and-bcm-for-gpio-pin-numbering
 class LED(object):
-    """
-    LED制御クラス
+    """LED control class
     """
 
     def __init__(self, pin, off_state=1, default_off=True):
-        """
-        コンストラクタ
+        """Constructor
+
+        Args:
+            pin (int): GPIO Pin number where LED is connected.
+            off_state (int): Output value when LED is OFF. 0 or 1.
+            default_off (bool): True if the default LED state is OFF.
         """
         self.pin = pin
         # 既定ではLEDは負論理制御
@@ -58,23 +65,22 @@ class LED(object):
         return
 
     def cleanup(self):
-        """
-        クリーンアップ
+        """End LED control
+
+        End control of LED control and release GPIO pin.
         """
         GPIO.cleanup(self.pin)
 
         return
 
     def on(self):
-        """
-        LED点灯
+        """Turn on the LED
         """
         GPIO.output(self.pin, self._on)
         self.state = LEDState.ON
 
     def off(self):
-        """
-        LED消灯
+        """Turn off the LED
         """
         GPIO.output(self.pin, self._off)
         self.state = LEDState.OFF

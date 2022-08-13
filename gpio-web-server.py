@@ -10,6 +10,7 @@
 # @par          License
 # This software is released under the MIT License.
 #
+"""CGI Script to Control LEDs"""
 
 import argparse
 import cgi
@@ -31,8 +32,14 @@ led_ctrl_thread_stop = False
 
 
 class Handler(http.server.CGIHTTPRequestHandler):
+    """Customized CGIHTTPRequestHandler
+    """
+
     def do_GET(self):
-        # ignore request to favicon
+        """Customized do_GET method
+
+        Customized do_GET method to ignore requests to favicon.
+        """
         if self.path.endswith("favicon.ico"):
             self.send_response(HTTPStatus.OK)
             self.send_header("Content-Type", "image/x-icon")
@@ -43,6 +50,10 @@ class Handler(http.server.CGIHTTPRequestHandler):
         return super().do_GET()
 
     def do_POST(self):
+        """Customized do_POST method
+
+        Customized do_POST method to provide LED control API.
+        """
         if self.path == "/api/led":
             form = cgi.FieldStorage(fp=self.rfile, headers=self.headers,
                                     environ={"REQUEST_METHOD": "POST", "CONTENT_TYPE": self.headers["Content-Type"]})
@@ -61,7 +72,12 @@ class Handler(http.server.CGIHTTPRequestHandler):
 
 
 class StoppableThreadingHTTPServer(http.server.ThreadingHTTPServer):
+    """ThreadingHTTPServer that can be stopped by KeyboardInterrupt
+    """
+
     def run(self):
+        """Run the server
+        """
         try:
             self.serve_forever()
         except KeyboardInterrupt:
@@ -71,7 +87,15 @@ class StoppableThreadingHTTPServer(http.server.ThreadingHTTPServer):
 
 
 class LEDCtrlThread(threading.Thread):
+    """LED control thread class
+    """
+
     def __init__(self, leds):
+        """Constructor
+
+        Args:
+            leds (dict): LED objects dictionary
+        """
         super().__init__()
         self._leds = leds
         self._leds_settings = {}
@@ -84,6 +108,11 @@ class LEDCtrlThread(threading.Thread):
             self._leds_settings[led_name]["delay-off"] = 500
 
     def run(self):
+        """Run the LED control thread
+
+        Process LED control requests stored in ``led_ctrl_req_queue``.
+        When the LED reaches the blinking timing, the state of the LED is toggled.
+        """
         global led_ctrl_thread_stop
         while not led_ctrl_thread_stop:
             global led_ctrl_req_queue
@@ -112,6 +141,14 @@ class LEDCtrlThread(threading.Thread):
                         self._leds_settings[led_name]["last-time"] = dt_now
 
     def _process_led_ctrl_req(self, req):
+        """Process LED control request
+
+        Args:
+            req (cgi.FieldStorage): LED control request.
+
+        Returns:
+            (bool): True if successful, False otherwise.
+        """
         led_name = None
         for req_key in req:
             if req_key in self._leds:
@@ -147,6 +184,11 @@ class LEDCtrlThread(threading.Thread):
 
 
 def main(args):
+    """Main function
+
+    Args:
+        args (argparse.Namespace): An object holding attributes.
+    """
     debug_mode = args.debug
     # LED pin assignment dict
     led_conf = {
@@ -193,6 +235,11 @@ def main(args):
 
 
 def parse_args():
+    """Convert argument strings to objects
+
+    Returns:
+        (argparse.Namespace): An object holding attributes.
+    """
     parser = argparse.ArgumentParser(
         description="CGI Script to Control LEDs"
     )
